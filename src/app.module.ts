@@ -6,6 +6,7 @@ import { IngestionModule } from './ingestion/ingestion.module';
 import { AnalyticsModule } from './analytics/analytics.module';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { DatabaseInitService } from './database/database-init.service';
 
 @Module({
   imports: [
@@ -15,6 +16,6 @@ import { AppService } from './app.service';
     AnalyticsModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, DatabaseInitService],
 })
 export class AppModule {}

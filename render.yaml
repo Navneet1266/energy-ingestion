@@ -1,0 +1,35 @@
+services:
+  - type: web
+    name: energy-ingestion
+    runtime: docker
+    plan: free
+    envVars:
+      - key: DB_HOST
+        fromDatabase:
+          name: energy-ingestion-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: energy-ingestion-db
+          property: port
+      - key: DB_USERNAME
+        fromDatabase:
+          name: energy-ingestion-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: energy-ingestion-db
+          property: password
+      - key: DB_NAME
+        fromDatabase:
+          name: energy-ingestion-db
+          property: database
+      - key: PORT
+        value: 3000
+      - key: DB_SSL
+        value: true
+
+databases:
+  - name: energy-ingestion-db
+    plan: free
+    postgresMajorVersion: 16

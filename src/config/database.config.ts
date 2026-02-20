@@ -9,4 +9,5 @@ export const databaseConfig = (): TypeOrmModuleOptions => ({
   database: process.env.DB_NAME || 'energy_ingestion',
   autoLoadEntities: true,
   synchronize: false,
+  ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false,
 });
