@@ -1,11 +1,15 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
 export const databaseConfig = (): TypeOrmModuleOptions => {
+  const ssl = process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false;
   const base: TypeOrmModuleOptions = {
     type: 'postgres',
     autoLoadEntities: true,
     synchronize: false,
-    ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false,
+    ssl,
+    retryAttempts: 3,
+    retryDelay: 1000,
+    extra: { connectionTimeoutMillis: 5000, ssl },
   };
 
   if (process.env.DATABASE_URL) {
