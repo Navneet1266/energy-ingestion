@@ -1,7 +1,7 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
 export const databaseConfig = (): TypeOrmModuleOptions => {
-  const useSsl = process.env.DB_SSL === 'true';
+  const useSsl = process.env.DB_SSL?.trim() === 'true';
   const sslExtra = useSsl ? { ssl: { rejectUnauthorized: false } } : {};
 
   if (process.env.DATABASE_URL) {
